@@ -18,3 +18,11 @@ function getPlayerChoice() {
     }
 }
 
+function getComputerChoice() {
+    const options = ['rock', 'paper', 'scissors'];
+    // Generate a radom number from 0 to 2, since options goes from index 0 up to the index 2
+    let randomIndex = Math.floor(Math.random() * 3);
+    let computerChoice = options[randomIndex];
+    console.log(`Computer chooses ${computerChoice}`);
+    return computerChoice;
+}
