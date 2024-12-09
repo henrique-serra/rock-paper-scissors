@@ -1,3 +1,7 @@
+let roundsPlayed = 0;
+let playerScore = 0;
+let computerScore = 0;
+
 function getPlayerChoice() {
     let playerChoice = prompt("Choose rock, paper or scissors");
     // IF player press ESC, get player choice again
@@ -39,8 +43,32 @@ function playRound() {
         || (playerChoice === 'paper' && computerChoice === 'rock')
         || (playerChoice === 'scissors' && computerChoice === 'paper')
     if (playerWon) {
-        console.log("Player wins the round!")
+        console.log("Player wins the round!");
+        playerScore++;
     } else {
-        console.log("Computer wins the round!")
+        console.log("Computer wins the round!");
+        computerScore++;
+    }
+    roundsPlayed++;
+    console.group("Score");
+    console.log(`Player score: ${playerScore}`);
+    console.log(`Computer score: ${computerScore}`);
+    console.groupEnd("Score");
+    console.info(`Rounds played: ${roundsPlayed}`);
+}
+
+function playGame() {
+    roundsPlayed = 0;
+    playerScore = 0;
+    computerScore = 0;
+    while (roundsPlayed < 5) {
+        playRound();
+    }
+    if (playerScore > computerScore) {
+        console.log("Player wins the game!");
+    } else {
+        console.log("Computer wins the game!");
     }
 }
+
+playGame();
