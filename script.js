@@ -26,3 +26,21 @@ function getComputerChoice() {
     console.log(`Computer chooses ${computerChoice}`);
     return computerChoice;
 }
+
+function playRound() {
+    let playerChoice = getPlayerChoice();
+    let computerChoice = getComputerChoice();
+    // IF there is a tie, play round again
+    if (playerChoice === computerChoice) {
+        playRound();
+        return;
+    }
+    let playerWon = (playerChoice === 'rock' && computerChoice === 'scissors')
+        || (playerChoice === 'paper' && computerChoice === 'rock')
+        || (playerChoice === 'scissors' && computerChoice === 'paper')
+    if (playerWon) {
+        console.log("Player wins the round!")
+    } else {
+        console.log("Computer wins the round!")
+    }
+}
