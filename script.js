@@ -70,3 +70,5 @@ function playGame() {
         console.log("Computer wins the game!");
     }
 }
+
+console.log("If you want to play, type playGame()");
