@@ -51,10 +51,10 @@ function playRound() {
     }
     roundsPlayed++;
     console.group("Score");
+    console.info(`Rounds played: ${roundsPlayed}`);
     console.log(`Player score: ${playerScore}`);
     console.log(`Computer score: ${computerScore}`);
     console.groupEnd("Score");
-    console.info(`Rounds played: ${roundsPlayed}`);
 }
 
 function playGame() {
@@ -70,5 +70,3 @@ function playGame() {
         console.log("Computer wins the game!");
     }
 }
-
-playGame();
