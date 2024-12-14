@@ -10,6 +10,11 @@ body {
     align-content: center;
 }
 
+#result {
+    margin: auto;
+    width: max-content;
+}
+
 #container {
     height: 50vh;
     width: 500px;

@@ -3,12 +3,21 @@ let roundsPlayed = 0;
 let playerScore = 0;
 let computerScore = 0;
 
+const gameWinnerElement = document.querySelector("#gameWinner");
+const playerChoiceElement = document.querySelector("#playerChoice");
+const computerChoiceElement = document.querySelector("#computerChoice");
+const winnerElement = document.querySelector("#winner");
+const roundsPlayedElement = document.querySelector("#roundsPlayed");
+const playerScoreElement = document.querySelector("#playerScore");
+const computerScoreElement = document.querySelector("#computerScore");
+
 function getComputerChoice() {
     const options = ['Rock', 'Paper', 'Scissors'];
     // Generate a radom number from 0 to 2, since options goes from index 0 up to the index 2
     let randomIndex = Math.floor(Math.random() * 3);
     let computerChoice = options[randomIndex];
     console.log(`Computer chooses ${computerChoice}`);
+    computerChoiceElement.textContent = `Computer chooses ${computerChoice}`;
     return computerChoice;
 }
 
@@ -26,9 +35,12 @@ function checkGameWinner(playerScore, computerScore) {
 }
 
 function playRound(playerChoice) {
+    playerChoiceElement.textContent = `Player chooses ${playerChoice}`;
     let gameWinner = checkGameWinner(playerScore, computerScore);
     if (gameWinner) {
-        return;
+        roundsPlayed = 0;
+        playerScore = 0;
+        computerScore = 0;
     }
     let computerChoice = getComputerChoice();
     // IF there is a tie, play round again
@@ -38,10 +50,14 @@ function playRound(playerChoice) {
     }
     if (playerWinRound(playerChoice, computerChoice)) {
         console.log("Player wins the round!");
+        winnerElement.textContent = "Player wins the round!";
         playerScore++;
+        playerScoreElement.textContent = playerScore;
     } else {
         console.log("Computer wins the round!");
+        winnerElement.textContent = "Computer wins the round!";
         computerScore++;
+        computerScoreElement.textContent = computerScore;
     }
     roundsPlayed++;
     console.group("Score");
@@ -52,6 +68,7 @@ function playRound(playerChoice) {
     gameWinner = checkGameWinner(playerScore, computerScore);
     if (gameWinner) {
         console.log(`${gameWinner} wins the game!`);
+        gameWinnerElement.textContent = `${gameWinner} wins the game!`;
         return;
     }
 }
