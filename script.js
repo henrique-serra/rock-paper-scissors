@@ -1,26 +1,7 @@
+const buttons = document.querySelectorAll("button");
 let roundsPlayed = 0;
 let playerScore = 0;
 let computerScore = 0;
-
-function getPlayerChoice() {
-    let playerChoice = prompt("Choose rock, paper or scissors");
-    // IF player press ESC, get player choice again
-    if (!playerChoice) {
-        getPlayerChoice();
-    }
-    playerChoice = playerChoice.toLowerCase();
-    // IF player types something else than rock, paper or scissors, get player choice again
-    switch (playerChoice) {
-        case 'rock':
-        case 'paper':
-        case 'scissors':
-            console.log(`Player chooses ${playerChoice}`)
-            return playerChoice;
-    
-        default:
-            getPlayerChoice();
-    }
-}
 
 function getComputerChoice() {
     const options = ['rock', 'paper', 'scissors'];
@@ -31,18 +12,21 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function playRound() {
-    let playerChoice = getPlayerChoice();
+function playerWin(playerChoice, computerChoice) {
+    if (playerChoice === 'Rock' && computerChoice === 'Scissors') return true;
+    if (playerChoice === 'Paper' && computerChoice === 'Rock') return true;
+    if (playerChoice === 'Scissors' && computerChoice === 'Paper') return true;
+    return false;
+}
+
+function playRound(playerChoice) {
     let computerChoice = getComputerChoice();
     // IF there is a tie, play round again
     if (playerChoice === computerChoice) {
-        playRound();
+        playRound(playerChoice);
         return;
     }
-    let playerWon = (playerChoice === 'rock' && computerChoice === 'scissors')
-        || (playerChoice === 'paper' && computerChoice === 'rock')
-        || (playerChoice === 'scissors' && computerChoice === 'paper')
-    if (playerWon) {
+    if (playerWin(playerChoice, computerChoice)) {
         console.log("Player wins the round!");
         playerScore++;
     } else {
@@ -57,18 +41,25 @@ function playRound() {
     console.groupEnd("Score");
 }
 
+for (const button of buttons) {
+    button.addEventListener("click", event => {
+        let playerChoice = event.target.textContent;
+        console.log(`Player chooses ${playerChoice}`);
+        playRound(playerChoice);
+    });
+}
+
 function playGame() {
     roundsPlayed = 0;
     playerScore = 0;
     computerScore = 0;
-    while (roundsPlayed < 5) {
+    let keepPlaying = true;
+    while (keepPlaying) {
+        if (playerScore === 5 || computerScore === 5) {
+            let winner = playerScore > computerScore ? "Player" : "Computer";
+            console.log(`${winner} wins!`);
+            keepPlaying = false;
+        }
         playRound();
     }
-    if (playerScore > computerScore) {
-        console.log("Player wins the game!");
-    } else {
-        console.log("Computer wins the game!");
-    }
 }
-
-console.log("If you want to play, type playGame()");
