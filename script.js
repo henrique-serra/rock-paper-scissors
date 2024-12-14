@@ -38,14 +38,13 @@ function playRound(playerChoice) {
     playerChoiceElement.textContent = `Player chooses ${playerChoice}`;
     let gameWinner = checkGameWinner(playerScore, computerScore);
     if (gameWinner) {
-        roundsPlayed = 0;
-        playerScore = 0;
-        computerScore = 0;
+        return;
     }
     let computerChoice = getComputerChoice();
     // IF there is a tie, play round again
     if (playerChoice === computerChoice) {
         console.log("It's a tie! Play again!");
+        winnerElement.textContent = "It's a tie! Play again!";
         return;
     }
     if (playerWinRound(playerChoice, computerChoice)) {
@@ -60,6 +59,7 @@ function playRound(playerChoice) {
         computerScoreElement.textContent = computerScore;
     }
     roundsPlayed++;
+    roundsPlayedElement.textContent = roundsPlayed;
     console.group("Score");
     console.info(`Rounds played: ${roundsPlayed}`);
     console.log(`Player score: ${playerScore}`);
