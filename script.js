@@ -4,7 +4,7 @@ let playerScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
-    const options = ['rock', 'paper', 'scissors'];
+    const options = ['Rock', 'Paper', 'Scissors'];
     // Generate a radom number from 0 to 2, since options goes from index 0 up to the index 2
     let randomIndex = Math.floor(Math.random() * 3);
     let computerChoice = options[randomIndex];
@@ -12,7 +12,7 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function playerWin(playerChoice, computerChoice) {
+function playerWinRound(playerChoice, computerChoice) {
     if (playerChoice === 'Rock' && computerChoice === 'Scissors') return true;
     if (playerChoice === 'Paper' && computerChoice === 'Rock') return true;
     if (playerChoice === 'Scissors' && computerChoice === 'Paper') return true;
@@ -26,7 +26,7 @@ function playRound(playerChoice) {
         playRound(playerChoice);
         return;
     }
-    if (playerWin(playerChoice, computerChoice)) {
+    if (playerWinRound(playerChoice, computerChoice)) {
         console.log("Player wins the round!");
         playerScore++;
     } else {
