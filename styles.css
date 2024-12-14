@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+    height: 100vh;
+    align-content: center;
+}
+
+#container {
+    height: 50vh;
+    width: 500px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.divChoice {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    width: 70%;
+}
+
+button {
+    width: 70%;
+    height: 30px;
+}
+
+#scissors img {
+    position: relative;
+    top: -10px;
+}
