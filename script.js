@@ -4,7 +4,7 @@ let playerScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
-    const options = ['rock', 'paper', 'scissors'];
+    const options = ['Rock', 'Paper', 'Scissors'];
     // Generate a radom number from 0 to 2, since options goes from index 0 up to the index 2
     let randomIndex = Math.floor(Math.random() * 3);
     let computerChoice = options[randomIndex];
@@ -12,21 +12,31 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function playerWin(playerChoice, computerChoice) {
+function playerWinRound(playerChoice, computerChoice) {
     if (playerChoice === 'Rock' && computerChoice === 'Scissors') return true;
     if (playerChoice === 'Paper' && computerChoice === 'Rock') return true;
     if (playerChoice === 'Scissors' && computerChoice === 'Paper') return true;
     return false;
 }
 
+function checkGameWinner(playerScore, computerScore) {
+    if (playerScore === 5 && playerScore > computerScore) return "Player";
+    if (computerScore === 5 && playerScore < computerScore) return "Computer";
+    return false;
+}
+
 function playRound(playerChoice) {
+    let gameWinner = checkGameWinner(playerScore, computerScore);
+    if (gameWinner) {
+        return;
+    }
     let computerChoice = getComputerChoice();
     // IF there is a tie, play round again
     if (playerChoice === computerChoice) {
-        playRound(playerChoice);
+        console.log("It's a tie! Play again!");
         return;
     }
-    if (playerWin(playerChoice, computerChoice)) {
+    if (playerWinRound(playerChoice, computerChoice)) {
         console.log("Player wins the round!");
         playerScore++;
     } else {
@@ -39,7 +49,13 @@ function playRound(playerChoice) {
     console.log(`Player score: ${playerScore}`);
     console.log(`Computer score: ${computerScore}`);
     console.groupEnd("Score");
+    gameWinner = checkGameWinner(playerScore, computerScore);
+    if (gameWinner) {
+        console.log(`${gameWinner} wins the game!`);
+        return;
+    }
 }
+
 
 for (const button of buttons) {
     button.addEventListener("click", event => {
@@ -47,19 +63,4 @@ for (const button of buttons) {
         console.log(`Player chooses ${playerChoice}`);
         playRound(playerChoice);
     });
-}
-
-function playGame() {
-    roundsPlayed = 0;
-    playerScore = 0;
-    computerScore = 0;
-    let keepPlaying = true;
-    while (keepPlaying) {
-        if (playerScore === 5 || computerScore === 5) {
-            let winner = playerScore > computerScore ? "Player" : "Computer";
-            console.log(`${winner} wins!`);
-            keepPlaying = false;
-        }
-        playRound();
-    }
 }
